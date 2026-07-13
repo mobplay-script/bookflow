@@ -38,43 +38,43 @@ Tujuan: portfolio fullstack untuk recruiter. Target biaya: **Rp0 (semua free tie
 
 ---
 
-## 🔒 Fase 1 — Auth
-- [ ] Install & konfigurasi Auth.js (NextAuth v5) — credentials provider
-- [ ] Generate `AUTH_SECRET`
-- [ ] Hash password (bcrypt/argon) saat register
-- [ ] Halaman `/register` + `/login` (form + validasi Zod)
-- [ ] Middleware proteksi route `/dashboard/*`
-- [ ] Session helper (ambil user aktif di server component)
+## ✅ Fase 1 — Auth (SELESAI)
+- [x] Install & konfigurasi Auth.js (NextAuth v5) — credentials provider
+- [x] Generate `AUTH_SECRET`
+- [x] Hash password (bcrypt) saat register
+- [x] Halaman `/register` + `/login` (form + validasi Zod)
+- [x] Proteksi route `/dashboard/*` (Next 16: `proxy.ts`, bukan `middleware.ts`)
+- [x] Session helper (`getCurrentUser`)
 
-## 🧾 Fase 2 — Services (CRUD Layanan)
-- [ ] Halaman `/dashboard/services` (list)
-- [ ] Form tambah/edit layanan (nama, durasi, harga, aktif/nonaktif)
-- [ ] Server actions: create / update / delete
-- [ ] Validasi Zod + handling error di UI
+## ✅ Fase 2 — Services (SELESAI)
+- [x] Halaman `/dashboard/services` (list)
+- [x] Form tambah/edit layanan (nama, durasi, harga, aktif/nonaktif)
+- [x] Server actions: create / update / delete / toggle (ownership-scoped)
+- [x] Validasi Zod + handling error di UI
 
-## 📅 Fase 3 — Bookings (CRUD Booking)
-- [ ] Halaman `/dashboard/bookings` (list + filter status)
-- [ ] Form buat/edit booking (pilih service, nama & telp pelanggan, tanggal/jam)
-- [ ] Ubah status (pending → confirmed → done / cancelled)
-- [ ] Server actions + validasi
-- [ ] (opsional) tampilan kalender
+## ✅ Fase 3 — Bookings (SELESAI)
+- [x] Halaman `/dashboard/bookings` (list + filter status)
+- [x] Form buat/edit booking (pilih service, nama & telp pelanggan, tanggal/jam)
+- [x] Ubah status (pending → confirmed → done / cancelled) inline
+- [x] Server actions + validasi
+- [ ] (opsional) tampilan kalender — di-skip
 
-## 📊 Fase 4 — Analytics Dashboard
-- [ ] Halaman `/dashboard` (overview)
-- [ ] Kartu metrik: total revenue, jumlah booking, booking hari ini, rata-rata nilai
-- [ ] Chart tren 7/30 hari (Recharts) — revenue & jumlah booking
-- [ ] Breakdown per layanan (service terpopuler)
-- [ ] Query agregasi dari tabel Booking
+## ✅ Fase 4 — Analytics Dashboard (SELESAI)
+- [x] Halaman `/dashboard` (overview)
+- [x] Kartu metrik: total revenue, jumlah booking, booking hari ini, rata-rata nilai
+- [x] Chart tren 7/30 hari (Recharts) — revenue & jumlah booking (toggle, satu sumbu)
+- [x] Breakdown per layanan (service terpopuler)
+- [x] Query agregasi dari tabel Booking
 
-## ✨ Fase 5 — Polish & Rilis
-- [ ] Landing page (hero, fitur, CTA "Coba Demo")
-- [ ] Setup shadcn/ui untuk komponen konsisten
-- [ ] Seed data demo realistis (`prisma/seed.ts`)
-- [ ] Tombol **"Login sebagai Demo"** (akun demo read-friendly)
-- [ ] README bagus: screenshot/GIF, tech stack, link live demo di atas
-- [ ] Dark mode (opsional)
-- [ ] Cek responsif mobile
-- [ ] Final deploy + verifikasi live demo mulus
+## ✅ Fase 5 — Polish & Rilis (SELESAI kecuali deploy)
+- [x] Landing page (hero, fitur, CTA "Coba Demo")
+- [ ] Setup shadcn/ui — **di-skip** (komponen sudah konsisten; hindari churn/regresi)
+- [x] Seed data demo realistis (`prisma/seed.ts`)
+- [x] Tombol **"Login sebagai Demo"** (akun demo read-friendly)
+- [x] README bagus: tech stack, arsitektur, setup (placeholder screenshot & link live demo)
+- [ ] Dark mode — **di-skip** (opsional)
+- [x] Cek responsif mobile (nav mobile, tabel scroll-x)
+- [ ] Final deploy + verifikasi live demo — **butuh aksi user (import Vercel)**
 
 ---
 
