@@ -2,7 +2,7 @@
 
 > Mini SaaS **Booking & Analytics Dashboard** untuk bisnis jasa (salon, barbershop, dan sejenisnya). Catat booking pelanggan, kelola layanan, dan pahami performa lewat dashboard analitik.
 
-**🔗 Live demo:** _tambahkan URL Vercel di sini setelah deploy_
+**🔗 Live demo:** **[bookflow-ruddy.vercel.app](https://bookflow-ruddy.vercel.app/)**
 **👤 Akun demo:** klik tombol **“Coba Demo” / “Login sebagai Demo”** (tanpa perlu daftar)
 
 <!-- Tips: tambahkan screenshot/GIF dashboard di sini, mis. ![Dashboard](docs/dashboard.png) -->
