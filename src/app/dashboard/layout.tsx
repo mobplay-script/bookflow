@@ -34,6 +34,12 @@ export default async function DashboardLayout({
               >
                 Layanan
               </Link>
+              <Link
+                href="/dashboard/bookings"
+                className="rounded-md px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+              >
+                Booking
+              </Link>
             </nav>
           </div>
           <div className="flex items-center gap-4">

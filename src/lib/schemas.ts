@@ -54,6 +54,35 @@ export const serviceSchema = z.object({
     .max(1_000_000_000, "Harga terlalu besar"),
 });
 
+export const BOOKING_STATUSES = [
+  "PENDING",
+  "CONFIRMED",
+  "DONE",
+  "CANCELLED",
+] as const;
+
+export const bookingSchema = z.object({
+  serviceId: z.string().min(1, "Pilih layanan"),
+  customerName: z
+    .string()
+    .trim()
+    .min(2, "Nama pelanggan minimal 2 karakter")
+    .max(80, "Nama pelanggan terlalu panjang"),
+  customerPhone: z
+    .string()
+    .trim()
+    .max(30, "Nomor telepon terlalu panjang")
+    .optional(),
+  startTime: z.coerce.date().refine((d) => !isNaN(d.getTime()), {
+    message: "Tanggal/jam tidak valid",
+  }),
+  notes: z.string().trim().max(500, "Catatan terlalu panjang").optional(),
+});
+
+export const bookingStatusSchema = z.enum(BOOKING_STATUSES);
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type ServiceInput = z.infer<typeof serviceSchema>;
+export type BookingInput = z.infer<typeof bookingSchema>;
+export type BookingStatus = (typeof BOOKING_STATUSES)[number];
