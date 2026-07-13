@@ -6,6 +6,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/session";
 import { serviceSchema } from "@/lib/schemas";
+import { isDemoEmail, DEMO_READONLY_MSG } from "@/lib/demo";
 
 export type ServiceFormState = {
   fieldErrors?: Record<string, string[]>;
@@ -26,6 +27,7 @@ export async function createService(
 ): Promise<ServiceFormState> {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (isDemoEmail(user.email)) return { message: DEMO_READONLY_MSG };
 
   const parsed = parseService(formData);
   if (!parsed.success) {
@@ -48,6 +50,7 @@ export async function updateService(
 ): Promise<ServiceFormState> {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (isDemoEmail(user.email)) return { message: DEMO_READONLY_MSG };
 
   const parsed = parseService(formData);
   if (!parsed.success) {
@@ -71,6 +74,7 @@ export async function updateService(
 export async function deleteService(id: string) {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (isDemoEmail(user.email)) return;
 
   await prisma.service.deleteMany({ where: { id, userId: user.id } });
   revalidatePath("/dashboard/services");
@@ -79,6 +83,7 @@ export async function deleteService(id: string) {
 export async function toggleService(id: string) {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (isDemoEmail(user.email)) return;
 
   const service = await prisma.service.findFirst({
     where: { id, userId: user.id },

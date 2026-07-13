@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/session";
 import { signOutAction } from "@/lib/actions/auth";
+import { isDemoEmail } from "@/lib/demo";
 
 export default async function DashboardLayout({
   children,
@@ -57,6 +58,14 @@ export default async function DashboardLayout({
           </div>
         </div>
       </header>
+      {isDemoEmail(user.email) && (
+        <div className="border-b border-amber-200 bg-amber-50">
+          <div className="mx-auto max-w-6xl px-4 py-2 text-center text-xs text-amber-800">
+            👀 Kamu sedang menjelajah <strong>mode demo</strong> — data bersifat
+            read-only, perubahan tidak disimpan.
+          </div>
+        </div>
+      )}
       <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
     </div>
   );

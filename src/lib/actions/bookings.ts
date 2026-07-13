@@ -6,6 +6,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/session";
 import { bookingSchema, bookingStatusSchema } from "@/lib/schemas";
+import { isDemoEmail, DEMO_READONLY_MSG } from "@/lib/demo";
 
 export type BookingFormState = {
   fieldErrors?: Record<string, string[]>;
@@ -37,6 +38,7 @@ export async function createBooking(
 ): Promise<BookingFormState> {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (isDemoEmail(user.email)) return { message: DEMO_READONLY_MSG };
 
   const parsed = parseBooking(formData);
   if (!parsed.success) {
@@ -70,6 +72,7 @@ export async function updateBooking(
 ): Promise<BookingFormState> {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (isDemoEmail(user.email)) return { message: DEMO_READONLY_MSG };
 
   const parsed = parseBooking(formData);
   if (!parsed.success) {
@@ -105,6 +108,7 @@ export async function updateBooking(
 export async function updateBookingStatus(id: string, formData: FormData) {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (isDemoEmail(user.email)) return;
 
   const statusParsed = bookingStatusSchema.safeParse(formData.get("status"));
   if (!statusParsed.success) return;
@@ -119,6 +123,7 @@ export async function updateBookingStatus(id: string, formData: FormData) {
 export async function deleteBooking(id: string) {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (isDemoEmail(user.email)) return;
 
   await prisma.booking.deleteMany({ where: { id, userId: user.id } });
   revalidatePath("/dashboard/bookings");
