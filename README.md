@@ -96,4 +96,4 @@ prisma/
 
 ---
 
-Project portfolio oleh **Kevin Candra**.
+Project portfolio · GitHub: [github.com/mobplay-script](https://github.com/mobplay-script)
