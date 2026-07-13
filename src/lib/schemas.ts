@@ -35,5 +35,25 @@ export const loginSchema = z.object({
   password: z.string().min(1, "Password wajib diisi"),
 });
 
+// Field harga & durasi dikirim dari FormData sebagai string → coerce ke number.
+export const serviceSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, "Nama layanan minimal 2 karakter")
+    .max(80, "Nama layanan terlalu panjang"),
+  durationMin: z.coerce
+    .number()
+    .int("Durasi harus bilangan bulat")
+    .min(5, "Durasi minimal 5 menit")
+    .max(1440, "Durasi maksimal 1440 menit"),
+  price: z.coerce
+    .number()
+    .int("Harga harus bilangan bulat")
+    .min(0, "Harga tidak boleh negatif")
+    .max(1_000_000_000, "Harga terlalu besar"),
+});
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
+export type ServiceInput = z.infer<typeof serviceSchema>;
