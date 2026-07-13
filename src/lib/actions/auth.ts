@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 import { signIn, signOut } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { registerSchema, loginSchema } from "@/lib/schemas";
+import { DEMO_EMAIL, DEMO_PASSWORD } from "@/lib/demo";
 
 export type AuthFormState = {
   fieldErrors?: Record<string, string[]>;
@@ -66,4 +67,12 @@ export async function loginAction(
 
 export async function signOutAction() {
   await signOut({ redirectTo: "/login" });
+}
+
+export async function demoLoginAction() {
+  await signIn("credentials", {
+    email: DEMO_EMAIL,
+    password: DEMO_PASSWORD,
+    redirectTo: "/dashboard",
+  });
 }

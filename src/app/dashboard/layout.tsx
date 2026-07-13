@@ -21,7 +21,7 @@ export default async function DashboardLayout({
             <Link href="/dashboard" className="text-lg font-bold tracking-tight text-slate-900">
               Book<span className="text-indigo-600">Flow</span>
             </Link>
-            <nav className="hidden items-center gap-1 sm:flex">
+            <nav className="flex items-center gap-1">
               <Link
                 href="/dashboard"
                 className="rounded-md px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900"
