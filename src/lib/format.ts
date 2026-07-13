@@ -41,8 +41,8 @@ export const BOOKING_STATUS_LABEL: Record<string, string> = {
 };
 
 export const BOOKING_STATUS_BADGE: Record<string, string> = {
-  PENDING: "bg-amber-100 text-amber-700",
-  CONFIRMED: "bg-blue-100 text-blue-700",
-  DONE: "bg-green-100 text-green-700",
-  CANCELLED: "bg-slate-100 text-slate-500",
+  PENDING: "bg-brass-soft text-[#7a5310]",
+  CONFIRMED: "bg-pine-soft text-pine",
+  DONE: "bg-pine text-paper",
+  CANCELLED: "bg-hair/70 text-faint",
 };

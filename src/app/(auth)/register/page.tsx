@@ -8,8 +8,10 @@ export const metadata: Metadata = {
 export default function RegisterPage() {
   return (
     <div>
-      <h1 className="mb-1 text-xl font-semibold text-slate-900">Buat akun</h1>
-      <p className="mb-6 text-sm text-slate-600">
+      <h1 className="font-display text-2xl font-bold tracking-tight text-ink">
+        Buka tokomu
+      </h1>
+      <p className="mb-6 mt-1 text-sm text-muted">
         Mulai kelola booking bisnismu — gratis.
       </p>
       <RegisterForm />

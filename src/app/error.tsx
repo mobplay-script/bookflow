@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import { btnPrimary } from "@/lib/ui";
 
-// Error boundary global (Next.js App Router). Wajib client component.
 export default function GlobalError({
   error,
   reset,
@@ -11,23 +11,19 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Di produksi bisa diganti pelaporan ke layanan monitoring.
     console.error(error);
   }, [error]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-slate-50 px-4 text-center">
-      <p className="text-5xl">😕</p>
-      <h1 className="mt-4 text-xl font-semibold text-slate-900">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-paper px-4 text-center">
+      <p className="eyebrow text-brick">Ada yang tersendat</p>
+      <h1 className="mt-3 font-display text-2xl font-bold text-ink">
         Terjadi kesalahan
       </h1>
-      <p className="mt-2 max-w-sm text-sm text-slate-600">
+      <p className="mt-2 max-w-sm text-sm text-muted">
         Maaf, ada yang tidak beres saat memuat halaman ini. Coba lagi sebentar.
       </p>
-      <button
-        onClick={reset}
-        className="mt-6 rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
-      >
+      <button onClick={reset} className={`${btnPrimary} mt-6`}>
         Coba lagi
       </button>
     </div>

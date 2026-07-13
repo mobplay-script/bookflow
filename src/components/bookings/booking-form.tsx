@@ -5,14 +5,11 @@ import Link from "next/link";
 import type { BookingFormState } from "@/lib/actions/bookings";
 import { BOOKING_STATUSES } from "@/lib/schemas";
 import { BOOKING_STATUS_LABEL, formatRupiah } from "@/lib/format";
-
-const fieldClass =
-  "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10";
-const labelClass = "mb-1.5 block text-sm font-medium text-slate-700";
+import { inputClass, labelClass, btnPrimary } from "@/lib/ui";
 
 function FieldError({ errors }: { errors?: string[] }) {
   if (!errors?.length) return null;
-  return <p className="mt-1 text-xs text-red-600">{errors[0]}</p>;
+  return <p className="mt-1 text-xs text-brick">{errors[0]}</p>;
 }
 
 export type ServiceOption = {
@@ -29,7 +26,7 @@ type Props = {
     serviceId: string;
     customerName: string;
     customerPhone: string;
-    startTime: string; // "YYYY-MM-DDTHH:mm"
+    startTime: string;
     notes: string;
     status: string;
   };
@@ -47,7 +44,7 @@ export function BookingForm({ action, services, defaultValues, submitLabel }: Pr
   return (
     <form action={formAction} className="space-y-4">
       {state?.message && (
-        <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+        <div className="rounded-lg border border-brick/30 bg-brick/5 px-3 py-2 text-sm text-brick">
           {state.message}
         </div>
       )}
@@ -60,7 +57,7 @@ export function BookingForm({ action, services, defaultValues, submitLabel }: Pr
           id="serviceId"
           name="serviceId"
           defaultValue={defaultValues?.serviceId ?? ""}
-          className={fieldClass}
+          className={inputClass}
         >
           <option value="" disabled>
             — Pilih layanan —
@@ -85,20 +82,20 @@ export function BookingForm({ action, services, defaultValues, submitLabel }: Pr
             name="customerName"
             type="text"
             defaultValue={defaultValues?.customerName}
-            className={fieldClass}
+            className={inputClass}
           />
           <FieldError errors={fieldErrors.customerName} />
         </div>
         <div>
           <label htmlFor="customerPhone" className={labelClass}>
-            No. telepon <span className="text-slate-400">(opsional)</span>
+            No. telepon <span className="text-faint">(opsional)</span>
           </label>
           <input
             id="customerPhone"
             name="customerPhone"
             type="tel"
             defaultValue={defaultValues?.customerPhone}
-            className={fieldClass}
+            className={inputClass}
           />
           <FieldError errors={fieldErrors.customerPhone} />
         </div>
@@ -106,14 +103,14 @@ export function BookingForm({ action, services, defaultValues, submitLabel }: Pr
 
       <div>
         <label htmlFor="startTime" className={labelClass}>
-          Tanggal & jam
+          Tanggal &amp; jam
         </label>
         <input
           id="startTime"
           name="startTime"
           type="datetime-local"
           defaultValue={defaultValues?.startTime}
-          className={fieldClass}
+          className={inputClass}
         />
         <FieldError errors={fieldErrors.startTime} />
       </div>
@@ -127,7 +124,7 @@ export function BookingForm({ action, services, defaultValues, submitLabel }: Pr
             id="status"
             name="status"
             defaultValue={defaultValues?.status}
-            className={fieldClass}
+            className={inputClass}
           >
             {BOOKING_STATUSES.map((st) => (
               <option key={st} value={st}>
@@ -140,30 +137,26 @@ export function BookingForm({ action, services, defaultValues, submitLabel }: Pr
 
       <div>
         <label htmlFor="notes" className={labelClass}>
-          Catatan <span className="text-slate-400">(opsional)</span>
+          Catatan <span className="text-faint">(opsional)</span>
         </label>
         <textarea
           id="notes"
           name="notes"
           rows={2}
           defaultValue={defaultValues?.notes}
-          className={fieldClass}
+          className={inputClass}
         />
         <FieldError errors={fieldErrors.notes} />
       </div>
 
       <div className="flex items-center gap-3 pt-1">
-        <button
-          type="submit"
-          disabled={pending}
-          className="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
-        >
+        <button type="submit" disabled={pending} className={btnPrimary}>
           {pending ? "Menyimpan…" : submitLabel}
         </button>
         {isEdit && (
           <Link
             href="/dashboard/bookings"
-            className="text-sm font-medium text-slate-600 hover:text-slate-900"
+            className="text-sm font-medium text-muted hover:text-ink"
           >
             Batal
           </Link>

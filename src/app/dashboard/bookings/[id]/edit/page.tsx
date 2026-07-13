@@ -37,7 +37,6 @@ export default async function EditBookingPage({
     select: { id: true, name: true, price: true, isActive: true },
   });
 
-  // Jika layanan booking ini sudah nonaktif, tetap tampilkan di dropdown.
   const services: ServiceOption[] = activeServices.some((s) => s.id === booking.serviceId)
     ? activeServices
     : [booking.service, ...activeServices];
@@ -47,14 +46,16 @@ export default async function EditBookingPage({
       <div>
         <Link
           href="/dashboard/bookings"
-          className="text-sm font-medium text-slate-600 hover:text-slate-900"
+          className="text-sm font-medium text-muted transition hover:text-ink"
         >
           ← Kembali ke Booking
         </Link>
-        <h1 className="mt-2 text-2xl font-bold text-slate-900">Edit booking</h1>
+        <h1 className="mt-2 font-display text-2xl font-bold tracking-tight text-ink">
+          Edit booking
+        </h1>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="rounded-xl border border-hair bg-card p-6">
         <BookingForm
           action={updateBooking.bind(null, booking.id)}
           services={services}

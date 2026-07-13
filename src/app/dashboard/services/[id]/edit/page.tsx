@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 export default async function EditServicePage({
   params,
 }: {
-  // Next 16: params adalah Promise, wajib di-await.
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
@@ -30,14 +29,16 @@ export default async function EditServicePage({
       <div>
         <Link
           href="/dashboard/services"
-          className="text-sm font-medium text-slate-600 hover:text-slate-900"
+          className="text-sm font-medium text-muted transition hover:text-ink"
         >
           ← Kembali ke Layanan
         </Link>
-        <h1 className="mt-2 text-2xl font-bold text-slate-900">Edit layanan</h1>
+        <h1 className="mt-2 font-display text-2xl font-bold tracking-tight text-ink">
+          Edit layanan
+        </h1>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="rounded-xl border border-hair bg-card p-6">
         <ServiceForm
           action={updateService.bind(null, service.id)}
           defaultValues={{

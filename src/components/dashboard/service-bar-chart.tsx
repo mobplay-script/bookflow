@@ -12,9 +12,9 @@ import {
 import type { ServiceStat } from "@/lib/analytics";
 import { formatRupiah } from "@/lib/format";
 
-const ACCENT = "#4f46e5";
-const GRID = "#e2e8f0";
-const AXIS = "#94a3b8";
+const ACCENT = "#163f33";
+const GRID = "#e4dcc9";
+const AXIS = "#9a9080";
 
 function ServiceTooltip({
   active,
@@ -26,22 +26,23 @@ function ServiceTooltip({
   if (!active || !payload?.length) return null;
   const s = payload[0].payload;
   return (
-    <div className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs shadow-md">
-      <div className="font-semibold text-slate-900">{s.name}</div>
-      <div className="mt-0.5 text-slate-500">{s.bookings} booking</div>
-      <div className="text-slate-500">{formatRupiah(s.revenue)} revenue</div>
+    <div className="rounded-lg border border-hair bg-card px-3 py-2 text-xs shadow-md">
+      <div className="font-semibold text-ink">{s.name}</div>
+      <div className="mt-0.5 tnum text-muted">{s.bookings} booking</div>
+      <div className="tnum text-muted">{formatRupiah(s.revenue)}</div>
     </div>
   );
 }
 
 export function ServiceBarChart({ data }: { data: ServiceStat[] }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <h2 className="mb-4 text-base font-semibold text-slate-900">
+    <div className="rounded-xl border border-hair bg-card p-5">
+      <p className="eyebrow">Paling laku</p>
+      <h2 className="mb-4 font-display text-base font-semibold text-ink">
         Layanan terpopuler
       </h2>
       {data.length === 0 ? (
-        <p className="py-12 text-center text-sm text-slate-400">Belum ada data.</p>
+        <p className="py-12 text-center text-sm text-faint">Belum ada data.</p>
       ) : (
         <div style={{ height: Math.max(140, data.length * 44) }} className="w-full">
           <ResponsiveContainer width="100%" height="100%">
@@ -55,19 +56,19 @@ export function ServiceBarChart({ data }: { data: ServiceStat[] }) {
               <XAxis
                 type="number"
                 allowDecimals={false}
-                tick={{ fontSize: 11, fill: AXIS }}
+                tick={{ fontSize: 11, fill: AXIS, fontFamily: "var(--font-mono)" }}
                 tickLine={false}
                 axisLine={{ stroke: GRID }}
               />
               <YAxis
                 type="category"
                 dataKey="name"
-                tick={{ fontSize: 12, fill: "#475569" }}
+                tick={{ fontSize: 12, fill: "#4c463a" }}
                 tickLine={false}
                 axisLine={false}
                 width={110}
               />
-              <Tooltip content={<ServiceTooltip />} cursor={{ fill: "#f1f5f9" }} />
+              <Tooltip content={<ServiceTooltip />} cursor={{ fill: "#efe9db" }} />
               <Bar dataKey="bookings" fill={ACCENT} radius={[0, 4, 4, 0]} barSize={18} />
             </BarChart>
           </ResponsiveContainer>

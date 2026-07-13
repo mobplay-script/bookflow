@@ -18,7 +18,7 @@ export function BookingStatusSelect({
         name="status"
         defaultValue={status}
         onChange={(e) => e.currentTarget.form?.requestSubmit()}
-        className="rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 outline-none focus:border-slate-900"
+        className="rounded-md border border-hair bg-card px-2 py-1 text-xs font-medium text-ink outline-none transition focus:border-pine"
         aria-label="Ubah status"
       >
         {BOOKING_STATUSES.map((st) => (
@@ -33,10 +33,10 @@ export function BookingStatusSelect({
 
 export function BookingRowActions({ id }: { id: string }) {
   return (
-    <div className="flex items-center justify-end gap-1.5">
+    <div className="flex items-center justify-end gap-1">
       <Link
         href={`/dashboard/bookings/${id}/edit`}
-        className="rounded-md px-2 py-1 text-xs font-medium text-indigo-600 hover:bg-indigo-50"
+        className="rounded-md px-2 py-1 text-xs font-medium text-pine transition hover:bg-pine-soft"
       >
         Edit
       </Link>
@@ -50,7 +50,7 @@ export function BookingRowActions({ id }: { id: string }) {
       >
         <button
           type="submit"
-          className="rounded-md px-2 py-1 text-xs font-medium text-red-600 hover:bg-red-50"
+          className="rounded-md px-2 py-1 text-xs font-medium text-brick transition hover:bg-brick/10"
         >
           Hapus
         </button>

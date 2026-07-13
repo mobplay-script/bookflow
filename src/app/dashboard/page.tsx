@@ -6,6 +6,7 @@ import { formatRupiah } from "@/lib/format";
 import { StatCard } from "@/components/dashboard/stat-card";
 import { TrendChart } from "@/components/dashboard/trend-chart";
 import { ServiceBarChart } from "@/components/dashboard/service-bar-chart";
+import { btnPrimary } from "@/lib/ui";
 
 export const metadata: Metadata = {
   title: "Dashboard — BookFlow",
@@ -27,15 +28,15 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">
-          Halo, {user?.name} 👋
+        <p className="eyebrow">Ringkasan</p>
+        <h1 className="mt-1 font-display text-2xl font-bold tracking-tight text-ink">
+          Halo, {user?.name}.
         </h1>
-        <p className="mt-1 text-sm text-slate-600">
-          Ringkasan performa {user?.businessName}.
+        <p className="mt-1 text-sm text-muted">
+          Begini kondisi {user?.businessName} belakangan ini.
         </p>
       </div>
 
-      {/* Kartu metrik */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatCard
           label="Total revenue"
@@ -52,16 +53,13 @@ export default async function DashboardPage() {
       </div>
 
       {data.totalBookings === 0 ? (
-        <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
-          <p className="text-sm text-slate-500">
-            Belum ada data booking. Analitik akan muncul setelah kamu mencatat
-            booking pertama.
+        <div className="rounded-xl border border-dashed border-hair bg-card p-10 text-center">
+          <p className="text-sm text-muted">
+            Belum ada catatan booking. Angka akan muncul setelah janji pertama
+            tercatat.
           </p>
-          <Link
-            href="/dashboard/bookings"
-            className="mt-4 inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
-          >
-            Buat booking
+          <Link href="/dashboard/bookings" className={`${btnPrimary} mt-4`}>
+            Catat booking
           </Link>
         </div>
       ) : (

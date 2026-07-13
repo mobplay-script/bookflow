@@ -3,14 +3,11 @@
 import { useActionState } from "react";
 import Link from "next/link";
 import type { ServiceFormState } from "@/lib/actions/services";
-
-const fieldClass =
-  "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10";
-const labelClass = "mb-1.5 block text-sm font-medium text-slate-700";
+import { inputClass, labelClass, btnPrimary } from "@/lib/ui";
 
 function FieldError({ errors }: { errors?: string[] }) {
   if (!errors?.length) return null;
-  return <p className="mt-1 text-xs text-red-600">{errors[0]}</p>;
+  return <p className="mt-1 text-xs text-brick">{errors[0]}</p>;
 }
 
 type Props = {
@@ -35,7 +32,7 @@ export function ServiceForm({ action, defaultValues, submitLabel }: Props) {
   return (
     <form action={formAction} className="space-y-4">
       {state?.message && (
-        <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+        <div className="rounded-lg border border-brick/30 bg-brick/5 px-3 py-2 text-sm text-brick">
           {state.message}
         </div>
       )}
@@ -50,7 +47,7 @@ export function ServiceForm({ action, defaultValues, submitLabel }: Props) {
           type="text"
           defaultValue={defaultValues?.name}
           placeholder="mis. Potong Rambut"
-          className={fieldClass}
+          className={inputClass}
         />
         <FieldError errors={fieldErrors.name} />
       </div>
@@ -68,7 +65,7 @@ export function ServiceForm({ action, defaultValues, submitLabel }: Props) {
             max={1440}
             step={5}
             defaultValue={defaultValues?.durationMin ?? 30}
-            className={fieldClass}
+            className={inputClass}
           />
           <FieldError errors={fieldErrors.durationMin} />
         </div>
@@ -83,34 +80,30 @@ export function ServiceForm({ action, defaultValues, submitLabel }: Props) {
             min={0}
             step={1000}
             defaultValue={defaultValues?.price ?? 0}
-            className={fieldClass}
+            className={inputClass}
           />
           <FieldError errors={fieldErrors.price} />
         </div>
       </div>
 
-      <label className="flex items-center gap-2 text-sm text-slate-700">
+      <label className="flex items-center gap-2 text-sm text-ink">
         <input
           type="checkbox"
           name="isActive"
           defaultChecked={defaultValues ? defaultValues.isActive : true}
-          className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+          className="h-4 w-4 rounded border-hair text-pine focus:ring-pine"
         />
         Aktif (bisa dipilih saat booking)
       </label>
 
       <div className="flex items-center gap-3 pt-1">
-        <button
-          type="submit"
-          disabled={pending}
-          className="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
-        >
+        <button type="submit" disabled={pending} className={btnPrimary}>
           {pending ? "Menyimpan…" : submitLabel}
         </button>
         {isEdit && (
           <Link
             href="/dashboard/services"
-            className="text-sm font-medium text-slate-600 hover:text-slate-900"
+            className="text-sm font-medium text-muted hover:text-ink"
           >
             Batal
           </Link>

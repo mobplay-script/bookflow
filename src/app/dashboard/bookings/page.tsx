@@ -18,7 +18,6 @@ export const metadata: Metadata = {
 export default async function BookingsPage({
   searchParams,
 }: {
-  // Next 16: searchParams adalah Promise.
   searchParams: Promise<{ status?: string }>;
 }) {
   const { status } = await searchParams;
@@ -56,25 +55,27 @@ export default async function BookingsPage({
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Booking</h1>
-        <p className="mt-1 text-sm text-slate-600">
-          Catat & kelola jadwal booking pelanggan.
+        <p className="eyebrow">Buku janji</p>
+        <h1 className="mt-1 font-display text-2xl font-bold tracking-tight text-ink">
+          Booking
+        </h1>
+        <p className="mt-1 text-sm text-muted">
+          Catat dan pantau setiap janji pelanggan.
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        {/* Form buat booking */}
         <div className="lg:col-span-1">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-base font-semibold text-slate-900">
+          <div className="rounded-xl border border-hair bg-card p-6">
+            <h2 className="mb-4 font-display text-base font-semibold text-ink">
               Buat booking
             </h2>
             {services.length === 0 ? (
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-muted">
                 Belum ada layanan aktif.{" "}
                 <Link
                   href="/dashboard/services"
-                  className="font-medium text-indigo-600 underline underline-offset-2"
+                  className="font-semibold text-pine underline-offset-2 hover:underline"
                 >
                   Tambah layanan
                 </Link>{" "}
@@ -90,9 +91,7 @@ export default async function BookingsPage({
           </div>
         </div>
 
-        {/* Daftar booking */}
         <div className="space-y-4 lg:col-span-2">
-          {/* Filter status */}
           <div className="flex flex-wrap gap-1.5">
             {filterTabs.map((tab) => {
               const active = statusFilter === tab.key;
@@ -105,8 +104,8 @@ export default async function BookingsPage({
                   href={href}
                   className={`rounded-full px-3 py-1 text-xs font-medium transition ${
                     active
-                      ? "bg-slate-900 text-white"
-                      : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
+                      ? "bg-pine text-paper"
+                      : "border border-hair bg-card text-muted hover:text-ink"
                   }`}
                 >
                   {tab.label}
@@ -116,40 +115,38 @@ export default async function BookingsPage({
           </div>
 
           {bookings.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
-              <p className="text-sm text-slate-500">
+            <div className="rounded-xl border border-dashed border-hair bg-card p-10 text-center">
+              <p className="text-sm text-muted">
                 {statusFilter
                   ? "Tidak ada booking dengan status ini."
-                  : "Belum ada booking. Buat booking pertamamu di form sebelah."}
+                  : "Belum ada booking. Buat yang pertama lewat form di samping."}
               </p>
             </div>
           ) : (
-            <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="overflow-x-auto rounded-xl border border-hair bg-card">
               <table className="w-full text-left text-sm">
-                <thead className="border-b border-slate-200 bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
-                  <tr>
-                    <th className="px-4 py-3 font-medium">Pelanggan</th>
-                    <th className="px-4 py-3 font-medium">Layanan</th>
-                    <th className="px-4 py-3 font-medium">Jadwal</th>
-                    <th className="px-4 py-3 font-medium">Status</th>
-                    <th className="px-4 py-3 text-right font-medium">Aksi</th>
+                <thead className="border-b border-hair bg-paper/60">
+                  <tr className="[&>th]:px-4 [&>th]:py-3">
+                    <th className="eyebrow font-normal">Pelanggan</th>
+                    <th className="eyebrow font-normal">Layanan</th>
+                    <th className="eyebrow font-normal">Jadwal</th>
+                    <th className="eyebrow font-normal">Status</th>
+                    <th className="eyebrow text-right font-normal">Aksi</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-hair">
                   {bookings.map((b) => (
-                    <tr key={b.id} className="hover:bg-slate-50">
+                    <tr key={b.id} className="transition hover:bg-paper/50">
                       <td className="px-4 py-3">
-                        <div className="font-medium text-slate-900">
-                          {b.customerName}
-                        </div>
+                        <div className="font-medium text-ink">{b.customerName}</div>
                         {b.customerPhone && (
-                          <div className="text-xs text-slate-500">
+                          <div className="tnum text-xs text-faint">
                             {b.customerPhone}
                           </div>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-slate-600">{b.service.name}</td>
-                      <td className="px-4 py-3 text-slate-600">
+                      <td className="px-4 py-3 text-muted">{b.service.name}</td>
+                      <td className="px-4 py-3 tnum text-muted">
                         {formatDateTime(b.startTime)}
                       </td>
                       <td className="px-4 py-3">

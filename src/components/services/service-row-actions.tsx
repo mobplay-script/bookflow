@@ -11,18 +11,18 @@ export function ServiceRowActions({
   isActive: boolean;
 }) {
   return (
-    <div className="flex items-center justify-end gap-1.5">
+    <div className="flex items-center justify-end gap-1">
       <form action={toggleService.bind(null, id)}>
         <button
           type="submit"
-          className="rounded-md px-2 py-1 text-xs font-medium text-slate-600 hover:bg-slate-100"
+          className="rounded-md px-2 py-1 text-xs font-medium text-muted transition hover:bg-paper hover:text-ink"
         >
           {isActive ? "Nonaktifkan" : "Aktifkan"}
         </button>
       </form>
       <Link
         href={`/dashboard/services/${id}/edit`}
-        className="rounded-md px-2 py-1 text-xs font-medium text-indigo-600 hover:bg-indigo-50"
+        className="rounded-md px-2 py-1 text-xs font-medium text-pine transition hover:bg-pine-soft"
       >
         Edit
       </Link>
@@ -36,7 +36,7 @@ export function ServiceRowActions({
       >
         <button
           type="submit"
-          className="rounded-md px-2 py-1 text-xs font-medium text-red-600 hover:bg-red-50"
+          className="rounded-md px-2 py-1 text-xs font-medium text-brick transition hover:bg-brick/10"
         >
           Hapus
         </button>
